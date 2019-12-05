@@ -1,0 +1,289 @@
+<!--{{> header}}
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<div class="container">
+<div class="card">
+  <h3 class="card-header info-color white-text text-center py-4">
+    <strong>Checkout</strong>
+  </h3>
+
+  <div class="card-body px-lg-5 pt-0">
+      <h3>Your Total: ${{total}}</h3>
+
+      <div id="charge-error" role="alert" class="alert alert-danger {{#if noError}}hidden{{/if}}">
+          {{errMsg}}
+      </div> 
+
+    <form action="/checkout" method="post" id="checkout-form" class="text-center" style="color: #757575;">
+
+      <div class="md-form">
+        <input type="text" id="name" class="form-control" required name="name">
+        <label for="materialLoginFormName">Name</label>
+      </div>
+
+      <div class="md-form">
+        <input type="text" id="address" class="form-control" required name="address">
+        <label for="materialLoginFormAddress">Address</label>
+      </div>
+
+      <div class="md-form">
+        <input type="text" id="card-name" class="form-control" required>
+        <label for="card-name">Card Holder Name</label>
+      </div>
+
+      <div class="md-form">
+        <input type="text" id="card-number" class="form-control" required>
+        <label for="card-number">Credit Card Number</label>
+      </div>
+
+      <div class="md-form">
+        <input type="text" id="card-expiry-month" class="form-control" required>
+        <label for="card-expiry-month">Expiration Month</label>
+      </div>
+
+      <div class="md-form">
+        <input type="text" id="card-expiry-year" class="form-control" required>
+        <label for="card-expiry-year">Expiration Year</label>
+      </div>
+
+      <div class="md-form">
+        <input type="text" id="card-cvc" class="form-control" required>
+        <label for="card-cvc">Card CVC</label>
+      </div>
+
+      <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Buy now</button>
+
+      <p>Our social networks</p>
+      <a type="button" class="btn-floating btn-fb btn-sm">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a type="button" class="btn-floating btn-tw btn-sm">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a type="button" class="btn-floating btn-li btn-sm">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a type="button" class="btn-floating btn-git btn-sm">
+        <i class="fab fa-github"></i>
+      </a>
+
+    </form>
+  </div>
+</div>
+</div>
+
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript" src="/javascripts/checkout.js"></script>
+-->
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+    <div class="container">
+      <a href="/" class="navbar-brand waves-effect"><strong>
+        <i class="fas fa-shopping-bag"></i> ᴇᴀꜱʏꜱʜᴏᴘ</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+                
+        <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link active waves-effect" href="/"><strong><i class="fas fa-home"></i> Home</strong></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active waves-effect" href="#">Product</a>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link waves-effect" data-toggle="modal" data-target="#exampleModal">About us<span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active waves-effect" href="#">Blog</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav nav-flex-icons">
+
+        <li class="nav-item active">
+          <a class="nav-link waves-effect" href="/shopping-cart/"><strong>
+            <i class="fas fa-shopping-cart"></i> <span class="clearfix d-none d-sm-inline-block">Shopping Card</span></strong>
+            <span class="badge red z-depth-1 ml-1 mr-1">{{session.cart.totalQty}}</span>
+            </a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a href="" class="nav-link dropdown-toggle waves-effect" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-extended="false"><strong><i class="fas fa-user"></i><span class="clearfix d-none d-sm-inline-block">User Management</span></strong></a>
+
+          <div class="dropdown-menu" aria-labelleby="navbarDropdownMenuLink">
+          {{# if login }}
+              <a class="dropdown-item waves-effect" href="/user/profile"><i class="fas fa-user-circle"></i> User Account</a>
+              <a class="dropdown-item waves-effect" href="/user/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          {{ else }}
+              <a class="dropdown-item waves-effect" href="/user/signup"><i class="fas fa-user-plus"></i> Sign up</a>
+              <a class="dropdown-item waves-effect" href="/user/signin"><i class="fas fa-sign-in-alt"></i> Sign in</a>
+          {{/if}}
+          </div>
+
+        </li>
+        
+        <li class="nav-item">
+          <a href="https://uk-ua.facebook.com/" class="nav-link waves-effect">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="https://twitter.com/" class="nav-link waves-effect">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="https://www.instagram.com/" class="nav-link border border-light rounded waves-effect">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </li>        
+
+      </ul>
+                
+      </div>
+    </div>
+  </nav>
+
+  <div class="view" style="background-image: url('https://images.pexels.com/photos/34577/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+    <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+      <div class="container">
+        <div class="wow fadeIn row">
+
+          <div class="col-md-6 mb-4 white-text text-center text-md-left">
+            <h1 class="display-4 font-weight-bold wow fadeInLeft" data-wow-delay="0.3s">Checkout Page </h1>
+            <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
+            <h6 class="mb-3 wow fadeInLeft" data-wow-delay="0.3s"><strong style="font-weight: bold; font-size: 35px">power by <img class="mt-2" style="height: 100px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/1200px-Stripe_Logo%2C_revised_2016.svg.png" alt=""></strong></h6>
+            <a href="https://stripe.com/" class="btn btn-outline-white wow fadeInLeft" data-wow-delay="0.3s">Learn more 
+            <i class="fab fa-stripe-s ml-2"></i>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-xl-5 mb-4">
+            <div class="card wow fadeInRight" data-wow-delay="0.3s">
+                <div class="card-body">
+                
+                <form action="/checkout" method="post" id="checkout-form">
+                    <h3 class="dark-grey-text text-center mt-2 mb-2"><strong>
+                    <i class="fab fa-cc-visa prefix grey-text"></i>
+                    Payment Details</strong></h3>
+
+                <div id="charge-error" class="alert alert-danger {{#if noError}}d-none{{/if}}">
+                  {{errMsg}}
+                </div> 
+
+                <hr>
+                
+                <div class="md-form">
+                    <i class="fas fa-envelope prefix grey-text active"></i>
+                    <input type="text" id="name" class="form-control" required name="name">
+                    <label data-error="wrong" data-success="right" for="form34">Name</label>
+                </div>
+
+                <div class="md-form">
+                    <i class="fas fa-map-marked prefix grey-text active"></i>
+                    <input type="text" id="address" class="form-control" required name="address">
+                    <label data-error="wrong" data-success="right" for="form34">Address</label>
+                </div>
+
+                <div class="md-form">
+                    <i class="fas fa-signature prefix grey-text active"></i>
+                    <input type="text" id="card-name" class="form-control" required>
+                    <label data-error="wrong" data-success="right" for="card-name">Card Holder Name</label>
+                </div>
+
+                <div class="md-form">
+                    <i class="fas fa-credit-card prefix grey-text active"></i>
+                    <input type="text" id="card-number" class="form-control" required>
+                    <label data-error="wrong" data-success="right" for="card-number">Credit Card Number</label>
+                </div>
+
+                <div class="md-form">
+                    <i class="fas fa-calendar-alt prefix grey-text active"></i>
+                    <input type="text" id="card-expiry-month" class="form-control" required>
+                    <label data-error="wrong" data-success="right" for="card-expiry-month">Expiration Month</label>
+                </div>
+
+                <div class="md-form">
+                    <i class="fas fa-calendar prefix grey-text active"></i>
+                    <input type="text" id="card-expiry-year" class="form-control" required>
+                    <label data-error="wrong" data-success="right" for="card-expiry-year">Expiration Year</label>
+                </div>
+
+                <div class="md-form">
+                    <i class="far fa-credit-card prefix grey-text active"></i>
+                    <input type="text" id="card-cvc" class="form-control" required>
+                    <label data-error="wrong" data-success="right" for="card-cvc">Card CVC</label>
+                </div>
+
+                <div class="text-center">
+                  <span style="font-size: 20px;" class="badge badge-light badge-pill light z-depth-1 ml-1 mr-1 mt-1 mb-2">Your Total: ${{total}} </span>
+                </div>
+
+                <div class="text-center mt-2">
+                  <button class="btn btn-indigo waves-effect" type="submit">Buy now</button>
+                </div>
+
+                </form>
+                </div>
+            </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<footer class="page-footer font-small unique-color-dark pt-4">
+
+  <!-- Footer Elements -->
+  <div class="container col-xl-5 mb-4">
+
+    <h3 class="text-center"><strong>Contact form</strong></h3>
+    <hr class="white">
+
+    <form class="text-center" action="#!">
+
+        <input type="text" id="defaultContactFormName" class="form-control mb-4" placeholder="Name">
+
+        <input type="email" id="defaultContactFormEmail" class="form-control mb-4" placeholder="E-mail">
+
+        <label><h6>Subject</h6></label>
+        <select class="browser-default custom-select mb-4">
+            <option value="" disabled>Choose option</option>
+            <option value="1" selected>Feedback</option>
+            <option value="2">Report a bug</option>
+            <option value="3">Feature request</option>
+            <option value="4">Feature request</option>
+        </select>
+
+        <div class="form-group">
+            <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Message"></textarea>
+        </div>
+
+        <button class="btn btn-info btn-block" type="submit">Send</button>
+
+    </form>
+
+  </div>
+
+  <div class="footer-copyright text-center py-3">© 2019 Copyright:
+    <a href="/"> EASYSHOP.com</a>
+  </div>
+
+</footer>
+
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript" src="/javascripts/checkout.js"></script>

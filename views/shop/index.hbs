@@ -1,0 +1,127 @@
+{{> header}}
+  <!-- JQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+{{> carousel}}
+
+<main>
+    <div class="container">
+        
+        <nav class="navbar navbar-expand-lg navbar-dark
+        mdb-color unique-color-dark mt-3 mb-5">
+            <span class="navbar-brand">Categories:</span>
+
+            <button class="navbar-toggler" type="button"
+            data-toggle="collapse" data-target="#naxtNav"
+            aria-controls="nextNav" aria-expanded="false" aria-label="Toggle navigation">
+            
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="nextNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link waves-effect">All</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link waves-effect">Smartphones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link waves-effect">Laptop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link waves-effect">Computer games</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link waves-effect">Accessories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link waves-effect">Clothes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link waves-effect">Sporting goods</a>
+                    </li>
+                </ul>
+
+                <form class="form-inline">
+                    <div class="md-form my-0">
+                        <input type="text" class="form-control mr-sm-2"
+                        placeholder="Search" aria-label="Search">
+                    </div>
+                </form>
+            </div>
+
+        </nav>
+
+        <section class="text-center mb-4">
+
+            <div class="row justify-content-center">
+                <div class="col-sm-6 mb-3">
+                    <div id="success" role="alert" class="alert alert-success {{#if noMessages}}d-none{{/if}}">
+                    {{ successMsg }}
+                    </div>
+                </div>
+            </div>
+
+            {{# each products}}
+            <div class="row wow fadeIn">
+                {{# each this}}
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card" style="height: 40rem;">
+
+                        <div class="view overlay">
+                            <img class="card-img-top" src="{{ this.imagePath }}" alt="sp">
+                            <a href="">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+
+                        <div class="card-body text-center">
+                            <a class="grey-text" href="">
+                                <h5>{{ this.title }}</h5>
+                            </a>
+                            <a href="" class="grey-text">
+                                <h6>{{ this.category }}</h6>
+                            </a>
+                            <h5>
+                                <strong>
+                                    <a href="#" class="dark-grey-text">{{ this.description }} 
+                                        <span class="badge badge-pill danger-color">NEW</span>
+                                    </a>
+                                </strong>
+                            </h5>
+                            <h4 class="font-weight-bold blue-text">
+                                <strong>${{ this.price }}</strong>
+                            </h4>
+                            <a href="/add-to-cart/{{this._id}}" role="button" class="btn btn-lg btn-block btn-outline-success btn-rounded ml-auto waves-effect ">Buy</a>
+                        </div>
+
+                    </div>
+                </div>
+                <button class="btn-top unique-color-dark" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+            {{/each}}
+            </div>
+        {{/each}}
+        </section>
+    </div>
+</main>
+ <!-- JQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+      var $btnTop = $(".btn-top")
+  $(window).on("scroll", function(){
+      if($(window).scrollTop() >= 10) {
+          $btnTop.fadeIn();
+      }
+      else {
+          $btnTop.fadeOut();
+      }
+  });
+
+  $btnTop.on("click", function(){
+      $("html,body").animate({scrollTop:0}, 900)
+  });
+  </script>
+{{> footer}}
+
+
+

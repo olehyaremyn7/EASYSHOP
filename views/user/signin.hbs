@@ -1,0 +1,265 @@
+<!--{{> header }}
+
+<div class="container">
+  <div class="card">
+
+  <h3 class="card-header info-color white-text text-center py-4">
+    <strong>Sign in</strong>
+  </h3>
+
+  <div class="card-body px-lg-5 pt-0">
+
+    <form action="/user/signin" method="post" class="text-center" style="color: #757575;" action="#!">
+
+    {{#if hasErrors}}
+            <div class="alert alert-danger">
+                {{# each messages}}
+                    <p>{{this}}</p>
+                {{/each}}
+            </div>
+         {{/if}}
+
+      <div class="md-form">
+        <input type="text" id="username" name="username" class="form-control">
+        <label for="materialLoginFormEmail">E-mail</label>
+      </div>
+
+      <div class="md-form">
+        <input type="password" id="password" name="password" class="form-control">
+        <label for="materialLoginFormPassword">Password</label>
+      </div>
+
+      <div class="d-flex justify-content-around">
+        <div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="materialLoginFormRemember">
+            <label class="form-check-label" for="materialLoginFormRemember">Remember me</label>
+          </div>
+        </div>
+      </div>
+
+      <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+
+      <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
+
+      <p>Not a member?
+        <a href="/user/signup">Register</a>
+      </p>
+
+      <p>Our social networks</p>
+      <a type="button" class="btn-floating btn-fb btn-sm">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a type="button" class="btn-floating btn-tw btn-sm">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a type="button" class="btn-floating btn-li btn-sm">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a type="button" class="btn-floating btn-git btn-sm">
+        <i class="fab fa-github"></i>
+      </a>
+
+    </form>
+
+  </div>
+
+</div>
+</div>
+-->
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+    <div class="container">
+      <a href="/" class="navbar-brand waves-effect"><strong>
+        <i class="fas fa-shopping-bag"></i> ᴇᴀꜱʏꜱʜᴏᴘ</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+                
+        <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link active waves-effect" href="/"><strong><i class="fas fa-home"></i> Home</strong></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active waves-effect" href="#">Product</a>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link waves-effect" data-toggle="modal" data-target="#exampleModal">About us<span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active waves-effect" href="#">Blog</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav nav-flex-icons">
+
+        <li class="nav-item active">
+          <a class="nav-link waves-effect" href="/shopping-cart/"><strong>
+            <i class="fas fa-shopping-cart"></i> <span class="clearfix d-none d-sm-inline-block">Shopping Card</span></strong>
+            <span class="badge red z-depth-1 ml-1 mr-1">{{session.cart.totalQty}}</span>
+            </a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a href="" class="nav-link dropdown-toggle waves-effect" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-extended="false"><strong><i class="fas fa-user"></i><span class="clearfix d-none d-sm-inline-block">User Management</span></strong></a>
+
+          <div class="dropdown-menu" aria-labelleby="navbarDropdownMenuLink">
+          {{# if login }}
+              <a class="dropdown-item waves-effect" href="/user/profile"><i class="fas fa-user-circle"></i> User Account</a>
+              <a class="dropdown-item waves-effect" href="/user/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          {{ else }}
+              <a class="dropdown-item waves-effect" href="/user/signup"><i class="fas fa-user-plus"></i> Sign up</a>
+              <a class="dropdown-item waves-effect" href="/user/signin"><i class="fas fa-sign-in-alt"></i> Sign in</a>
+          {{/if}}
+          </div>
+
+        </li>
+        
+        <li class="nav-item">
+          <a href="https://uk-ua.facebook.com/" class="nav-link waves-effect">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="https://twitter.com/" class="nav-link waves-effect">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="https://www.instagram.com/" class="nav-link border border-light rounded waves-effect">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </li>        
+
+      </ul>
+                
+      </div>
+    </div>
+  </nav>
+
+  <div class="view" style="background-image: url('https://images.pexels.com/photos/273222/pexels-photo-273222.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+    <div class="mask rgba-black-light d-flex align-items-center">
+      <div class="container">
+        <div class="row justify-content-center">
+
+          <div class="col-md-12 mb-4 white-text text-center">
+            <h1 class="h1-reponsive white-text text-uppercase font-weight-bold mb-0 pt-md-5 pt-5 wow fadeInDown" data-wow-delay="0.3s"><strong>Welcome</strong></h1>
+            <hr style="border-top: 3px solid #fff; width: 440px;" class="hr-light my-4 wow fadeInDown" data-wow-delay="0.4s">
+          </div>
+
+          <div class="col-md-6 col-xl-5 mb-4">
+            <div class="card wow fadeInRight" data-wow-delay="0.3s">
+                <div class="card-body">
+                
+                <form action="/user/signin" method="post">
+                    <h3 class="dark-grey-text text-center mt-2 mb-2"><strong>
+                    <i class="fas fa-user prefix grey-text"></i>
+                    Login In</strong></h3>
+
+                {{#if hasErrors}}
+                    <div class="alert alert-danger">
+                {{# each messages}}
+                    <p>{{this}}</p>
+                {{/each}}
+                    </div>
+                {{/if}}
+
+                <hr>
+                
+                <div class="md-form">
+                    <i class="fas fa-envelope prefix grey-text active"></i>
+                    <input type="text" id="username" name="username" class="form-control">
+                    <label data-error="wrong" data-success="right" for="form34" class="active">E-mail</label>
+                </div>
+
+                <div class="md-form">
+                    <i class="fas fa-key prefix grey-text"></i>
+                    <input type="password" id="password" name="password" class="form-control">
+                    <label data-error="wrong" data-success="right" for="form34" class="active">Password</label>
+                </div>
+      
+                <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+
+                <p class="text-center">Not a member?
+                  <a href="/user/signup">Register</a>
+                </p>
+
+                <div class="text-center mt-4">
+                <button class="btn btn-indigo waves-effect" type="submit">Sign in</button>
+
+                <hr>
+
+                <div class="inline-ul text-center">
+                    <a href="https://twitter.com/" class="p-2 m-2 li-ic waves-effect">
+                    <i class="fab fa-twitter indigo-text active"></i>
+                    </a>
+
+                    <a href="https://uk-ua.facebook.com/" class="p-2 m-2 li-ic waves-effect">
+                    <i class="fab fa-facebook-f indigo-text active"></i>
+                    </a>
+                              
+                    <a href="https://www.instagram.com/" class="p-2 m-2 li-ic waves-effect">
+                    <i class="fab fa-instagram indigo-text active"></i>
+                    </a>
+                </div>
+                </div>
+                </form>
+                </div>
+            </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- JQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<footer class="page-footer font-small unique-color-dark pt-4">
+
+  <!-- Footer Elements -->
+  <div class="container col-xl-5 mb-4">
+
+    <h3 class="text-center"><strong>Contact form</strong></h3>
+    <hr class="white">
+
+    <form class="text-center" action="#!">
+
+        <input type="text" id="defaultContactFormName" class="form-control mb-4" placeholder="Name">
+
+        <input type="email" id="defaultContactFormEmail" class="form-control mb-4" placeholder="E-mail">
+
+        <label><h6>Subject</h6></label>
+        <select class="browser-default custom-select mb-4">
+            <option value="" disabled>Choose option</option>
+            <option value="1" selected>Feedback</option>
+            <option value="2">Report a bug</option>
+            <option value="3">Feature request</option>
+            <option value="4">Feature request</option>
+        </select>
+
+        <div class="form-group">
+            <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Message"></textarea>
+        </div>
+
+        <button class="btn btn-info btn-block" type="submit">Send</button>
+
+    </form>
+
+  </div>
+
+  <div class="footer-copyright text-center py-3">© 2019 Copyright:
+    <a href="/"> EASYSHOP.com</a>
+  </div>
+
+</footer>
+
